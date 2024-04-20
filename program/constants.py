@@ -1,6 +1,8 @@
 from dydx3.constants import API_HOST_SEPOLIA, API_HOST_MAINNET
 from decouple import config
 
+TOKEN_FACTOR_10 = ["XLM-USD","DOGE-USD","TRON-USD"]
+
 # !!!! SELECT MODE !!!!
 MODE = "DEVELOPMENT"
 

@@ -1,6 +1,6 @@
-from decouple import config
-from dydx3 import Client
-from web3 import Web3
+from decouple import config # type: ignore
+from dydx3 import Client # type: ignore
+from web3 import Web3 # type: ignore
 from constants import (
   HOST,
   ETHEREUM_ADDRESS,
