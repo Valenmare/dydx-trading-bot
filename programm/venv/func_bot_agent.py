@@ -70,7 +70,7 @@ class BotAgent:
   def check_order_status_by_id(self, order_id):
 
     # Allow time to process
-    time.sleep(2)
+    time.sleep(5)
 
     # Check order status
     order_status = check_order_status(self.client, order_id)
