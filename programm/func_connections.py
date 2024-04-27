@@ -1,6 +1,7 @@
-from decouple import config 
+from decouple import config
 from dydx3 import Client 
 from web3 import Web3
+import inspect 
 from constants import (
   HOST,
   ETHEREUM_ADDRESS,
@@ -23,7 +24,7 @@ def connect_dydx():
           "passphrase": DYDX_API_PASSPHRASE,
       },
       stark_private_key = STARK_PRIVATE_KEY,
-      eth_private_key = ("ETH_PRIVATE_KEY"),
+      eth_private_key = config("ETH_PRIVATE_KEY"),
       default_ethereum_address = ETHEREUM_ADDRESS,
       web3 = Web3(Web3.HTTPProvider(HTTP_PROVIDER))
   )
