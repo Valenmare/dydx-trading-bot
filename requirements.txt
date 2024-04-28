@@ -113,3 +113,4 @@ websockets==9.1
 win32-setctime==1.1.0
 yarl==1.9.4
 zipp==3.18.1
+setuptools==39.1.0
