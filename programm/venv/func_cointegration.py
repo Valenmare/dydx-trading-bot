@@ -48,6 +48,8 @@ def calculate_cointegration(series_1, series_2):
   coint_flag = 1 if p_value < 0.05 and t_check else 0
   return coint_flag, hedge_ratio, half_life
 
+
+
 # Store Cointegration Results
 def store_cointegration_results(df_market_prices):
 
@@ -65,8 +67,7 @@ def store_cointegration_results(df_market_prices):
       series_2 = df_market_prices[quote_market].values.astype(float).tolist()
 
       # Check cointegration
-      if len(series_1) > 1 and len(series_2) > 1:
-        coint_flag, hedge_ratio, half_life = calculate_cointegration(series_1, series_2)
+      coint_flag, hedge_ratio, half_life = calculate_cointegration(series_1, series_2)
 
       # Log pair
       if coint_flag == 1 and half_life <= MAX_HALF_LIFE and half_life > 0:
