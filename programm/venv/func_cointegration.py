@@ -40,13 +40,13 @@ def calculate_cointegration(series_1, series_2):
   p_value = coint_res[1]
   critical_value = coint_res[2][1]
   model = sm.OLS(series_1, series_2).fit()
-  hedge_ratio = model.params[0]
-  spread = series_1 - (hedge_ratio * series_2)
+  hedge_ratio = model.params[1]
+  intercept = model.params[0]
+  spread = series_1 - (hedge_ratio * series_2) - intercept
   half_life = calculate_half_life(spread)
   t_check = coint_t < critical_value
   coint_flag = 1 if p_value < 0.05 and t_check else 0
   return coint_flag, hedge_ratio, half_life
-
 
 # Store Cointegration Results
 def store_cointegration_results(df_market_prices):
@@ -65,7 +65,8 @@ def store_cointegration_results(df_market_prices):
       series_2 = df_market_prices[quote_market].values.astype(float).tolist()
 
       # Check cointegration
-      coint_flag, hedge_ratio, half_life = calculate_cointegration(series_1, series_2)
+      if len(series_1) > 1 and len(series_2) > 1:
+        coint_flag, hedge_ratio, half_life = calculate_cointegration(series_1, series_2)
 
       # Log pair
       if coint_flag == 1 and half_life <= MAX_HALF_LIFE and half_life > 0:
