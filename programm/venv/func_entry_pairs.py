@@ -4,10 +4,11 @@ from func_public import get_candles_recent
 from func_cointegration import calculate_zscore
 from func_private import is_open_positions
 from func_bot_agent import BotAgent
-import pandas as pd 
+import pandas as pd
 import json
 
 from pprint import pprint
+
 
 TOKEN_FACTOR_10 = ["XLM-USD","DOGE-USD","TRON-USD"]
 
@@ -87,25 +88,25 @@ def open_positions(client):
           base_quantity = 1 / base_price * USD_PER_TRADE
           quote_quantity = 1 / quote_price * USD_PER_TRADE
           base_step_size = markets["markets"][base_market]["stepSize"]
-          quote_step_size = markets["markets"][quote_market]["stepSize"] 
+          quote_step_size = markets["markets"][quote_market]["stepSize"]
         for particolari in TOKEN_FACTOR_10 :
                 if base_market== particolari :
                     base_quantity= float(int(base_quantity/10)*10) 
                 if quote_market== particolari :
                     quote_quantity= float(int(quote_quantity/10)*10) 
               
-          # Format sizes
-    base_size = format_number(base_quantity, base_step_size)
-    quote_size = format_number(quote_quantity, quote_step_size)
+         # Format sizes
+        base_size = format_number(base_quantity, base_step_size)
+        quote_size = format_number(quote_quantity, quote_step_size)
 
           # Ensure size
-    base_min_order_size = markets["markets"][base_market]["minOrderSize"]
-    quote_min_order_size = markets["markets"][quote_market]["minOrderSize"]
-    check_base = float(base_quantity) > float(base_min_order_size)
-    check_quote = float(quote_quantity) > float(quote_min_order_size)
+        base_min_order_size = markets["markets"][base_market]["minOrderSize"]
+        quote_min_order_size = markets["markets"][quote_market]["minOrderSize"]
+        check_base = float(base_quantity) > float(base_min_order_size)
+        check_quote = float(quote_quantity) > float(quote_min_order_size)
 
           # If checks pass, place trades
-    if check_base and check_quote:
+        if check_base and check_quote:
 
             # Check account balance
             account = client.private.get_account()
